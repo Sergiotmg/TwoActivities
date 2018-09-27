@@ -25,7 +25,7 @@
             //el valor va  aser cual es la activida padre de de la actividad 2
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity"/>// valor padre de act2
 
         </activity>
     </application>
