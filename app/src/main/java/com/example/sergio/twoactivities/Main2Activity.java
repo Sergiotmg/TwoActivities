@@ -11,7 +11,6 @@ import android.widget.TextView;
 public class Main2Activity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY ="com.example.android.twoactivities.extra.REPLY";
-
     private TextView textMessage;
     private EditText mReply;
 
@@ -29,11 +28,7 @@ public class Main2Activity extends AppCompatActivity {
         mReply=findViewById(R.id.editText_main);
         // lo mostramos ahora en el textview
 
-
     }
-
-
-
     //metodo creado pulsando en el activity_main2 con create on clic eventhandler
     // al hacer alt+ enter en
     public void returnData(View view) {
@@ -46,8 +41,7 @@ public class Main2Activity extends AppCompatActivity {
         setResult(RESULT_OK,replyIntent);
         //setResult(); solo usar cuando sea Cancel, al cancelar el login RESULT_CANCEL y no pasa dat
         //setResult(RESULT_FIRST_USER,); SI HACE algo por 1ª vez el user
-
-        finish();
+        finish();//vuelve al main actitivy
 
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;//Place the cursor on the word "Log" and press Alt-Enter 
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,20 +28,22 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditText; // se le pone m es por los programadores de android, quiere decir que esa variable es de esa instancia
     // m que se ade tu clase entera
 
-    private EditText mTxtReply; //m para saber que es de esa clase y global
-    private EditText mTxtHeader;
+    private TextView mTxtReply; //m para saber que es de esa clase y global
+    private TextView  mTxtHeader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //hacer esto siempre oOJO!!!!!
-        mEditText=findViewById(R.id.editText_main);//enlazo mi variable editrtet con la parte grafica
+
+        //INICIALIZA
+        mEditText=findViewById(R.id.editText_main);//enlazo mi variable edittetx con la parte grafica
         mTxtHeader=findViewById(R.id.txtHeader);
         //la r es de resources que no sale aqhí
         // ejemplo para acceder a la carpeta resources a todo lo que haya dentro
         // getResources().getResourceName(R.drawable.)
         mTxtReply=findViewById(R.id.txtReply);//lo mismo para reply
-        Toast.makeText(this, "on create!",Toast.LENGTH_LONG.show());
+        Toast.makeText(this, "on create!",Toast.LENGTH_LONG).show();
 
     }
 
@@ -59,32 +62,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+        //startActivity(intent); //habia que anularlo porque lanzaba 2 veces y no salia la activity main
+        // en lugar de eso volvia a ejecutarla main y solo pulsando otra vez ejecutamos la startActivityForResult
+        //
         // SE USA EN CLASES QUE EXTIENDAN DE ACTIVITY
         //SI LA CASE NO EXTIENDE DE ACTIVITY NO SE PUEDE PONER lo anterior
         //startActivities() seria para mas de una a la vez
 
         //lanzar actividad esperando una respuesta
-        startActivityForResult(intent, TEXT_REQUEST);
+        startActivityForResult(intent, TEXT_REQUEST);//text es una cte declarada, en este caso un nº int
+        //si nos hacemos mas de un apeticion( la 1, la 2 o la 3)
 
 
     }
     //para mostrar el mensaje del main2activity en el main activity 1
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //result sabe si es resolt ok cancel
+        //si req es el que esperamos entro dentro , si es Ok hago otra
         super.onActivityResult(requestCode, resultCode, data);
         //SOLO AL ENTRAR OK ENTRAR
-        if (requestCode == TEXT_REQUEST ){
+        if (requestCode == TEXT_REQUEST ){//espera el id de la peticion
+            //si req es el que esperamos entro dentro
             if (resultCode == RESULT_OK) {
-                String reply=data.getStringExtra(Main2Activity.EXTRA_REPLY)// LA CONSTANTE DEL MAIN2 ES EXTRAREPLY
-                mTxtHeader.setVisibility(View.VISIBLE);
+                String reply=data.getStringExtra(Main2Activity.EXTRA_REPLY);// LA CONSTANTE DEL MAIN2 ES EXTRAREPLY
+                mTxtHeader.setVisibility(View.VISIBLE);//estaban invisibles
                 mTxtReply.setVisibility(View.VISIBLE);
-            } else {
-                Toast.makeText(this, "actividad cancelada!!",Toast.LENGTH_LONG.show());
+                mTxtReply.setText(reply);
+            } else {   //si es otro hago otra
+                Toast.makeText(this, "actividad cancelada!!",Toast.LENGTH_LONG).show();
                 //si cancelo son invisibles!!
+                //hay que hacerlo para que sea invisible otra vez!!!!
                 mTxtHeader.setVisibility(View.INVISIBLE);
                 mTxtReply.setVisibility(View.INVISIBLE);
+
             }
+
 
         }
     }
