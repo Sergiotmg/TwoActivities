@@ -41,6 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     //COPIO Y PEGO EL BOTON Y EL XTEXTO A INTRODUCIR EN ESTE MAIN ACTIVITY2 DEL ACTIVITY_MAIN
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"

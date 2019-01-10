@@ -1,9 +1,9 @@
 package com.example.sergio.twoactivities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;//Place the cursor on the word "Log" and press Alt-Enter 
+import android.support.v7.app.*;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
